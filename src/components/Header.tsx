@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Menu, X, Search, Facebook, Youtube, Instagram, Twitter } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Menu, Search, Facebook, Youtube, Instagram, Twitter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const navItems = [
   { name: "गृहपृष्ठ", href: "/" },
@@ -44,38 +45,38 @@ export function Header() {
       <div className="container py-3">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <motion.a
-            href="/"
-            className="flex items-center gap-3"
+          <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center text-primary-foreground shadow-card">
-              <svg viewBox="0 0 50 50" className="w-10 h-10" fill="currentColor">
-                <path d="M25 5c-11 0-20 9-20 20s9 20 20 20 20-9 20-20-9-20-20-20zm0 3c9.4 0 17 7.6 17 17s-7.6 17-17 17-17-7.6-17-17 7.6-17 17-17z"/>
-                <path d="M25 12l-8 13h5v10h6v-10h5z"/>
-              </svg>
-            </div>
-            <div>
-              <h1 className="text-xl font-bold text-primary leading-tight">ग्रामपंचायत टाकळघाट</h1>
-              <p className="text-xs text-muted-foreground">ता. हिंगणा, जि. नागपूर, महाराष्ट्र</p>
-            </div>
-          </motion.a>
+            <Link to="/" className="flex items-center gap-3">
+              <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center text-primary-foreground shadow-card">
+                <svg viewBox="0 0 50 50" className="w-10 h-10" fill="currentColor">
+                  <path d="M25 5c-11 0-20 9-20 20s9 20 20 20 20-9 20-20-9-20-20-20zm0 3c9.4 0 17 7.6 17 17s-7.6 17-17 17-17-7.6-17-17 7.6-17 17-17z"/>
+                  <path d="M25 12l-8 13h5v10h6v-10h5z"/>
+                </svg>
+              </div>
+              <div>
+                <h1 className="text-xl font-bold text-primary leading-tight">ग्रामपंचायत टाकळघाट</h1>
+                <p className="text-xs text-muted-foreground">ता. हिंगणा, जि. नागपूर, महाराष्ट्र</p>
+              </div>
+            </Link>
+          </motion.div>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center gap-1">
             {navItems.slice(0, 7).map((item, index) => (
-              <motion.a
+              <motion.div
                 key={item.name}
-                href={item.href}
-                className="nav-link px-3 py-2 text-sm font-medium"
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
               >
-                {item.name}
-              </motion.a>
+                <Link to={item.href} className="nav-link px-3 py-2 text-sm font-medium">
+                  {item.name}
+                </Link>
+              </motion.div>
             ))}
           </nav>
 
@@ -113,19 +114,22 @@ export function Header() {
                 </Button>
               </SheetTrigger>
               <SheetContent side="right" className="w-80">
-                <nav className="flex flex-col gap-2 mt-8">
+              <nav className="flex flex-col gap-2 mt-8">
                   {navItems.map((item, index) => (
-                    <motion.a
+                    <motion.div
                       key={item.name}
-                      href={item.href}
-                      className="px-4 py-3 text-lg font-medium hover:bg-muted rounded-lg transition-colors"
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ duration: 0.3, delay: index * 0.05 }}
-                      onClick={() => setIsOpen(false)}
                     >
-                      {item.name}
-                    </motion.a>
+                      <Link
+                        to={item.href}
+                        className="block px-4 py-3 text-lg font-medium hover:bg-muted rounded-lg transition-colors"
+                        onClick={() => setIsOpen(false)}
+                      >
+                        {item.name}
+                      </Link>
+                    </motion.div>
                   ))}
                 </nav>
                 <div className="flex items-center gap-3 mt-8 px-4">

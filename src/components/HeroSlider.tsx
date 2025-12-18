@@ -59,7 +59,7 @@ export function HeroSlider() {
             alt={slides[current].title}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 gradient-hero" />
+          <div className="absolute inset-0 bg-foreground/40" />
         </motion.div>
       </AnimatePresence>
 
